@@ -40,7 +40,7 @@ class HashRing:
 
     def set_key(self, key, value):
         node = self.get_node_for_a_key(key)
-        node.set(key=key, value=value)  # this will be an RPC once distributed
+        node.set(key=key, json_value=value)  # this will be an RPC once distributed
 
     def get_key(self, key):
         node = self.get_node_for_a_key(key)

@@ -12,9 +12,9 @@ class KafqaStoreNode:
         self.reverse_lookup_hashtables = dict()
         return
 
-    def set(self, key: str, value: dict):
+    def set(self, key: str, json_value: dict):
         # #### data type checking and populate secondary index
-        for attribute, value in value.items():
+        for attribute, value in json_value.items():
             # #### check if hashtable for this attribute already exists
             if self.reverse_lookup_hashtables.get(attribute):
                 # Using this attribute specific dictionary to store attribute datatype too
@@ -36,7 +36,7 @@ class KafqaStoreNode:
                 # #### setting datatype for the first insert
                 self.reverse_lookup_hashtables[attribute]['datatype'] = type(value)
 
-        self.hashtable[key] = value
+        self.hashtable[key] = json_value
 
     def get(self, key: str) -> dict:
         return self.hashtable.get(key, None)

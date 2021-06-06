@@ -12,18 +12,38 @@ class KafqaStoreTests:
         self.hr = HashRing()
         for n in self.nodes:
             self.hr.add_node(n)
-        print(self.hr.node_ring_indices)
 
-    def test_get(self):
+    def test_get_and_set(self):
         key = 'test1'
         value = {
             'prop1': 'yoyo',
             'prop2': 'singh',
         }
         self.hr.set_key(key, value)
-        print(self.hr.get_key(key))
         assert self.hr.get_key(key) is value
+
+    def test_delete(self):
+        key = 'test2'
+        value = {
+            'prop1': 'steve',
+            'prop2': 'jobs',
+        }
+        self.hr.set_key(key, value)
+        assert self.hr.get_key(key) is value
+        self.hr.del_key(key)
+        assert self.hr.get_key(key) is None
+
+    def test_reverse(self):
+        key = 'test3'
+        value = {
+            'reverse': 'lookup',
+            'prop2': 'jobs',
+        }
+        self.hr.set_key(key, value)
+        assert self.hr.reverse_lookup(value='lookup', attribute='reverse') == ['test3']
 
 
 t = KafqaStoreTests()
-t.test_get()
+t.test_get_and_set()
+t.test_delete()
+t.test_reverse()
