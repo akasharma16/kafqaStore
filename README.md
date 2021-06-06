@@ -21,7 +21,8 @@ A distributed key-value store supporting attributes and secondary indexing.
   - set: To store a new key-value pair into the store.
   - delete: To delete a key from the distributed store
   - reverse-lookup: To get a list of keys that contain a given attribute as part of their json value and attribute value is as provided in the query.
-  - add-node: To scale-up the system 
+  - add-node: To scale-up the system by adding a new node. 
+  - rm-node: To scale-down the system by removing a new node.
 
 ## Future scope:
 - Monitoring agents per node that stream out log data
